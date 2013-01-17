@@ -1,3 +1,0 @@
-read -p "Please input (y/n):" yn
-[ "$yn" == "Y" -o "$yn" == "y" ] && echo "Ok" && exit 0
-[ "$yn" == "N" -o "$yn" == "n" ] && echo "No" && exit 0

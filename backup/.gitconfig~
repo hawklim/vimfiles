@@ -1,5 +1,0 @@
-[user]
-	name = dongxiong
-	email = toyman@yahoo.cn
-[credential]
-	helper = cache --timeount=36000

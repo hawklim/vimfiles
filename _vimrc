@@ -48,7 +48,7 @@ if has("win32")
 	set nobackup				"不备份文件	
 else
 	set backup					"备份文件
-	set bdir=~/.vim/backup		"备份文件所在的路径
+	set bdir=~/vimbackup		"备份文件所在的路径
 endif
 
 "在当前目录查找tags文件，若当前目录无tags文件，则在上一层目录查找。
