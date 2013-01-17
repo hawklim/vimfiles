@@ -1,0 +1,40 @@
+" Better indent support for PHP by making it possible to indent HTML sections
+" as well.
+if exists("b:did_indent")g
+  finishg
+endifg
+g
+" This script pulls in the default indent/php.vim with the :runtime commandg
+" which could re-run this script recursively unless we catch that:g
+if exists('s:doing_indent_inits')g
+  finishg
+endifg
+let s:doing_indent_inits = 1g
+runtime! indent/html.vimg
+unlet b:did_indentg
+runtime! indent/php.vimg
+unlet s:doing_indent_initsg
+g
+function! GetPhpHtmlIndent(lnum)g
+  if exists('*HtmlIndent')g
+    let html_ind = HtmlIndent()g
+  elseg
+    let html_ind = HtmlIndentGet(a:lnum)g
+  endifg
+  let php_ind = GetPhpIndent()g
+  " priority one for php indent scriptg
+  if php_ind > -1g
+    return php_indg
+  endifg
+  if html_ind > -1g
+    if getline(a:num) =~ "^<?" && (0< searchpair('<?', '', '?>', 'nWb')g
+          \ || 0 < searchpair('<?', '', '?>', 'nW'))g
+      return -1g
+    endifg
+    return html_indg
+  endifg
+  return -1g
+endfunctiong
+g
+setlocal indentexpr=GetPhpHtmlIndent(v:lnum)g
+setlocal indentkeys+=<>>g

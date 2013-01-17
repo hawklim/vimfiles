@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Bootstrap 101 Template</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="style.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">Thoth</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="#">首页</a></li>
+						<li><a href="#">问题</a></li>
+						<li><a href="#">话题</a></li>
+						<li><a href="#">用户</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href="#">注册</a></li>
+						<li><a href="#">登录</a></li>
+					</ul>
+					<span class="divider-vertical pull-right"></span>
+					<form class="navbar-form pull-right" action="" method="post">
+						<input type="text" class="span4" placeholder="搜索问题、答案、用户" />
+					</form>
+				</div><!-- /nav-collapase -->
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="span9">
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>注册</legend>
+					</fieldset>
+					<div class="control-group">
+						<label class="control-label" for="email">您的邮箱地址</label>
+						<div class="controls">
+							<input type="text" id="email" placeholder="邮箱" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="name">您的尊姓大名</label>
+						<div class="controls">
+							<input type="text" id="name" placeholder="常用昵称或真名" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="password">登录密码</label>
+						<div class="controls">
+							<input type="password" id="password" placeholder="密码" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" class="btn btn-primary" name="" value="立即注册" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span9">
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>登录</legend>
+					</fieldset>
+					<div class="control-group">
+						<label class="control-label" for="email">您的邮箱地址</label>
+						<div class="controls">
+							<input type="text" id="email" placeholder="邮箱" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group error">
+						<label class="control-label" for="password">登录密码</label>
+						<div class="controls">
+							<input type="password" id="password" placeholder="密码" />
+							<p class="help-inline">密码长度不足6个字符</p>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<label class="checkbox">
+								<input type="checkbox" /> 记住我
+							</label>
+							<input type="submit" class="btn btn-primary" name="" value="登录" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span3">
+				<div class="well" style="padding: 8px 0;">
+					<ul class="nav nav-list">
+						<li class="active"><a href="#">修改个人资料</a></li>
+						<li><a href="#">修改邮箱地址</a></li>
+						<li><a href="#">修改登录密码</a></li>
+						<li><a href="#">通知设置</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="span9">
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>修改个人资料</legend>
+					</fieldset>
+					<div class="control-group">
+						<label class="control-label" for="name">称呼</label>
+						<div class="controls">
+							<input type="text" id="name" placeholder="常用昵称或真名" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">性别</label>
+						<div class="controls">
+							<label class="radio inline">
+								<input type="radio" name="gender" value="2" />保密
+							</label>
+							<label class="radio inline">
+								<input type="radio" name="gender" value="1" />男
+							</label>
+							<label class="radio inline">
+								<input type="radio" name="gender" value="0" />女
+							</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="introduce">自我介绍</label>
+						<div class="controls">
+							<textarea rows="3"></textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" class="btn btn-primary" name="" value="确认" />
+						</div>
+					</div>
+				</form>
+
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>修改邮箱地址</legend>
+					</fieldset>
+					<div class="control-group">
+						<label class="control-label" for="password">登录密码</label>
+						<div class="controls">
+							<input type="text" id="password" placeholder="密码" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="email">新的邮箱地址</label>
+						<div class="controls">
+							<input type="password" id="email" placeholder="新邮箱" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" class="btn btn-primary" name="" value="确认" />
+						</div>
+					</div>
+				</form>
+
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>修改登录密码</legend>
+					</fieldset>
+					<div class="control-group">
+						<label class="control-label" for="current_password">当前密码</label>
+						<div class="controls">
+							<input type="text" id="current_password" placeholder="原密码" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="new_password">新的密码</label>
+						<div class="controls">
+							<input type="password" id="new_password" placeholder="新密码" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="confirm_password">确认密码</label>
+						<div class="controls">
+							<input type="password" id="confirm_password" placeholder="确认密码" />
+							<p class="help-inline"></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" class="btn btn-primary" name="" value="确认" />
+						</div>
+					</div>
+				</form>
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>通知设置</legend>
+					</fieldset>
+					<div class="control-group">
+						<label class="control-label" for="current_password">什么情况下给我发通知</label>
+						<div class="controls">
+							<label class="checkbox">
+								<input type="checkbox" value="" />有人关注了我
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" value="" />我关注的问题有了新的回复
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" value="" />有人邀请我回答问题
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" value="" />我的问题被评论
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" value="" />我的回复被评论
+							</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" class="btn btn-primary" name="" value="确认" />
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html> 

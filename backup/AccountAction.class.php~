@@ -1,0 +1,28 @@
+<?php
+class AccountAction extends CommonAction {
+
+    function __construct() {
+        parent::__construct();
+    }
+	
+	public function index() {
+		$this->display();
+	}
+	
+	public function login() {
+		$this->display();	
+	}
+	
+	// µÇÂ¼¼ì²â
+	public function checkLogin() {
+
+	}
+
+	public function verify()
+    {
+		$type	 =	 isset($_GET['type'])?$_GET['type']:'gif';
+        import("@.ORG.Util.Image");
+        Image::buildImageVerify(4,1,$type);
+    }
+	
+}

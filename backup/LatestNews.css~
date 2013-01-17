@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+
+.LatestNews{
+	background:url(../Images/insdePage_notice/LatestNews.png) no-repeat;
+	width:233px;
+	}

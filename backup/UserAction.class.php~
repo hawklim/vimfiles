@@ -1,0 +1,77 @@
+<?php
+class UserAction extends Action {
+
+    public function _initialize() {
+        $Setting = M('Setting');
+        $setting = $Setting->find(1);
+        
+        $this->assign('setting', $setting);
+    }
+    
+    public function register() {
+        $Article = M('Article');
+        $news = $Article->where(array('cat_id' => 3))->order(array('list_order' => 'desc', 'add_time' => 'desc', 'article_id' => 'desc'))->limit(5)->select();
+        $this->assign('news', $news);
+        
+        $this->display();
+    }
+    
+    public function doRegister() {
+        if (isset($_POST['submitted'])) {
+            $User = D('User');
+            if ($User->create()) {
+                if ($User->add()) {
+                    $jumpUrl = U('User/logIn');
+                    $this->assign('jumpUrl', $jumpUrl);
+                    $this->success('成功注册！');
+                } else {
+                    $this->error('注册失败！');
+                }
+            } else {
+                $this->error($User->getError());
+            }
+        }
+    }
+    
+    public function logIn() {
+        $Article = M('Article');
+        $news = $Article->where(array('cat_id' => 3))->order(array('list_order' => 'desc', 'add_time' => 'desc', 'article_id' => 'desc'))->limit(5)->select();
+        $this->assign('news', $news);
+        $this->display();
+    }
+    
+    public function doLogIn() {
+        if (isset($_POST['submitted'])) {
+            $User = M('User');
+            
+            $user_data = array();
+            $user_data['user_name'] = mysql_real_escape_string($_POST['user_name']);
+            $user_data['password'] = sha1(mysql_real_escape_string($_POST['password']));
+            $user = $User->join(array('news_user_type ON news_user.user_type_id = news_user_type.user_type_id'))->where($user_data)->find();
+            
+            if ($user) {
+                $_SESSION['user'] = $user;
+                
+                $jumpUrl = U('Index/index');
+                $this->assign('jumpUrl', $jumpUrl);
+                $this->success('登录成功！');
+            } else {
+                $this->error('用户名或密码错误！');
+            }
+        }
+    }
+    
+    public function logOut() {
+        if (isset($_SESSION['user'])) {
+            $jumpUrl = U('User/logIn');
+            unset($_SESSION['user']);
+            session_destroy();
+        } else {
+            $jumpUrl = __ROOT__;
+        }
+        
+        $this->assign('jumpUrl', $jumpUrl);
+        $this->success('成功退出登录！');
+    }
+}
+?>

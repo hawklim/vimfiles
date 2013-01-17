@@ -1,0 +1,40 @@
+<?php
+
+class PurchaseAction extends Action {
+
+    function __construct() {
+	parent::__construct();
+    }
+
+    public function index() {
+	$page = array(
+	    'pageNum' => '2',
+	    'numPerPage' => '20',
+	    'orderField' => 'id',
+	);
+
+	$this->assign('page', $page);
+	$this->display();
+    }
+
+    public function match() {
+	if (isset($_POST['name'])) {
+	    $this->search();
+	}
+	$this->display();
+    }
+
+    private function search() {
+	$Solr = D('Search');
+	$name = $this->_post("name");
+	$field = $this->_post("property");
+	$certify = $this->_post("auth");
+	$model = '' ;
+	$compArrr = $Solr->searchCompByFacet($name, $model, $field, $certify);
+	$this->assign('compList' , $compArrr);
+    }
+
+	public function edit() {
+		$this->display();	
+	}
+}

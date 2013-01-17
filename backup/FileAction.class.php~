@@ -1,0 +1,69 @@
+<?php
+class FileAction extends Action {
+
+    public function _initialize() {
+        $Setting = M('Setting');
+        $setting = $Setting->find(1);
+        
+        $this->assign('setting', $setting);
+    }
+    
+    public function index() {
+        $File = M('File');
+        import("ORG.Util.Page");
+        import("ORG.Util.PageNav");
+        
+        if (isset($_GET['id'])) {
+            $id = (int) $_GET['id'];
+            $condition['jsjx_category.cat_id'] = $id;
+            $count = $File->where(array('cat_id' => $id))->count();
+        } else {
+            $condition['jsjx_category.cat_id'] = array('neq', 30);
+            $count = $File->where(array('cat_id' => array('neq', 30)))->count();
+        }
+        
+        $Page = new PageNav($count, 25);
+        $Page->setConfig('theme', '<li>%upPage%</li> <li id="n_num">%nowPage%/%totalPage%</li> <li>%downPage%</li>');
+        $show = $Page->show();
+        $this->assign('page',$show);
+        
+        $file = $File->join(array('news_category ON news_file.cat_id = news_category.cat_id'))->where($condition)->order(array('news_file.file_id' => 'desc'))->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        $this->assign('file', $file);
+        
+        // 最新公告
+        $Article = M('Article');
+        $news = $Article->where(array('cat_id' => 3))->order(array('list_order' => 'desc', 'add_time' => 'desc', 'article_id' => 'desc'))->limit(5)->select();
+        $this->assign('news', $news);
+        
+        $this->display();
+    }
+    
+    public function download() {
+        if (isset($_GET['savename'])) {
+            $save_name = $_GET['savename'];
+            $file = './Public/Uploads/' . $save_name; // 要下载的文件
+            ob_clean();
+            header('Pragma: public');
+            header('Last-Modified:'.gmdate('D, d M Y H:i:s') . 'GMT');
+            header('Cache-Control:no-store, no-cache, must-revalidate');
+            header('Cache-Control:pre-check=0, post-check=0, max-age=0');
+            header('Content-Transfer-Encoding:binary'); 
+            header('Content-Encoding:none');
+            header('Content-type:multipart/form-data');
+            header('Content-Disposition:attachment; filename="'.basename($file).'"'); //设置下载的默认文件名
+            header('Content-length:'. filesize($file));
+            $fp = fopen($file, 'r'); //读取数据，开始下载
+            while(connection_status() == 0 && $buf = @fread($fp, 8192)){
+                echo $buf;
+            }
+            fclose($fp);
+            @flush();
+            @ob_flush();
+            exit();
+        } else {
+            $this->error('非法操作！');
+        }
+    }
+    
+}
+?>

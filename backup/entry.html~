@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新闻发布系统</title>
+<link href="__CSS__/headfoot.css" rel="stylesheet" type="text/css" />
+<link href="__CSS__/HotNews.css" rel="stylesheet"  type="text/css" />
+<link href="__CSS__/insidePage.css"rel="stylesheet" type="text/css" />
+<!-- [if IE 6] -->
+<script type="text/javascript" src="../js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript">
+    DD_belatedPNG.fix('img');
+</script>
+<!-- [endif] -->
+</head>
+
+<body>
+<include file="Public:header" />
+<!-------------------------------------sidebar start---------------------------------------------------------------------------------->
+<div class="clear"></div>
+<div class="containner">
+<div id="sidebar">
+<div id="HotNews"><h2>热门新闻</h2>
+
+    <ul>
+        <volist name="news" id="vo">
+            <li>
+                <span class="date">{$vo.add_time|date='m-d',###}</span>
+                <a href="{:U('Article/entry?id=' . $vo['article_id'])}" title="{$vo.title}">{$vo.title|csubstr=0,22}</a>
+            </li>
+        </volist>         
+      </ul>
+    </div>
+</div>
+
+<!-------------------------------------sidebar end---------------------------------------------------------------------------------->
+<!-------------------------------------passage start---------------------------------------------------------------------------------->
+
+<div class="text">
+<h3>{$detail.title}</h3>
+<h6>来源：未知 浏览次数：{$detail.hits} 作者：未知 发表时间：{$detail.add_time|date="Y-m-d",###}</h6><br />
+{$detail.content}
+</div>
+<!-------------------------------------passage end---------------------------------------------------------------------------------->
+
+<!-------------------------------------comment start---------------------------------------------------------------------------------->
+        <div class="comments">
+                <volist name="comment" id="vo">
+                
+                <div class="cm_title">
+                	<h5>{$vo.user_name}</h5>
+                    <p class="cm_time">发表于{$vo.add_time|date='Y-m-d h:i:s', ###}</p>
+                    <p class="cm_ip"><if condition="$vo['author_ip'] neq ''">IP:{$vo.author_ip}</if></p>
+                </div>
+                
+                <div class="cm_content">
+                <p>{$vo.content}</p>
+                </div>
+                
+                </volist>
+                {$show}
+        </div>
+
+        <script charset="utf-8" src="__ROOT__/Admin/Public/Js/kindeditor/kindeditor.js"></script>
+        <script charset="utf-8" src="__ROOT__/Admin/Public/Js/kindeditor/lang/zh_CN.js"></script>
+        <script>
+                var editor;
+                KindEditor.ready(function(K) {
+                    editor = K.create('#editor_id', {
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : false,
+                    items : [
+                        'removeformat', 'emoticons', 'image', 'link']
+                    });
+                });
+        </script>
+        
+        <div class="comments">
+        <?php if(isset($_SESSION['user'])) : ?>
+        <form action="{:U('Article/insertComment')}" method="post">
+        <input type="hidden" name="article_id" value="{$_GET.id}" />
+                <p id="comments_author">发表人：{$_SESSION.user.user_name}<input type="hidden" name="user_id" value="{$_SESSION.user.user_id}" /></p>
+                <p><textarea id="editor_id" name="content" style="width:591px;height:300px;"></textarea></p>
+                <p><input type="submit" name="submitted" value="发表评论" id="submit_comment" /></p>
+       </form>
+       <?php else : ?>
+       请<a style="color:#11719E" href="{:U('User/logIn')}">登录</a>后评论~
+       <?php endif; ?>
+        </div>
+<!-------------------------------------comment end---------------------------------------------------------------------------------->
+</div>
+<include file="Public:footer" />
+</body>
+</html>

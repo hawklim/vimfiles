@@ -1,0 +1,27 @@
+<?php
+class Index_controller extends Controller {
+	function index() {
+		// $questions_model = $this->model->get_instance('Questions');
+
+		// // 当前页码
+		// $page_id = isset($_GET['page_id'])
+		// 	? (int) $_GET['page_id'] : 1;
+
+		// // 每页问题数
+		// $per_page = 10;
+
+		// // 获取问题
+		// $questions = $questions_model
+		// 	->get_questions(($page_id - 1) * $per_page, $per_page);
+
+		// // 分页
+		// $page_nav  = $questions_model
+		// 	->get_page_nav($page_id, $per_page);
+
+		// $this->view->assign('page_nav', $page_nav);
+		// $this->view->assign('questions', $questions);
+
+		// $this->view->display('index');
+	}
+}
+?>
