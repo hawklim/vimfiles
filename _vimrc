@@ -27,7 +27,7 @@ set ww=h,l,<,>,[,]					"设置whichwrap的值
 
 set autochdir				"切换当前目录为当前文件所在的目录
 set guioptions-=T			"隐藏工具栏
-set statusline=%F%m%r%h%w\ %=[%{&ff}]\%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
+"set statusline=%F%m%r%h%w\ %=[%{&ff}]\%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
 set laststatus=2
 syntax on					"代码高亮
 colorscheme molokai			"配色
@@ -61,15 +61,15 @@ filetype indent on				"为特定文件类型载入相关缩进文件
 
 "设置80字符对齐线
 "将对齐线设置在第81个字符的位置
-set cc=81
+"set cc=81
 "分别设置对齐线在终端和GUI下的颜色
-hi ColorColumn ctermbg=lightgrey guibg=#444444
+"hi ColorColumn ctermbg=lightgrey guibg=#444444
 
 "gvim最大化
 if has("win32")
-autocmd GUIEnter * simalt ~x
+	autocmd GUIEnter * simalt ~x
 else
-autocmd GUIEnter * winsize 200 100	"打开一个文件时无效，未弄清两数字代表的含义
+	autocmd GUIEnter * winsize 200 100	"打开一个文件时无效，未弄清两数字代表的含义
 endif
 
 "执行php代码
@@ -90,6 +90,17 @@ map <C-X> "+x
 "启用pathogen
 "管理插件的插件
 call pathogen#infect()
+
+"minibufexpl
+let g:miniBufExplorerMoreThanOne=1			"让minibufexpl自动打开
+let g:miniBufExplMapWindowNavVim=1			"可使用<C-h,j,k,l>切换到上下左右窗口
+let g:miniBufExplMapCTabSwitchBufs=1		"可使用<C-tab>切换窗口
+let g:miniBufExplMapWindowNavArrows=1		"可使用<C-箭头键切换到上下左右窗口
+let g:miniBufExplUseSingleClick=1			"单击即可切换buffer
+let g:miniBufExplModSelTarget=1				"让打开的buffer显示在正确的地方
+
+"ctrlp
+let g:ctrlp_working_path_mode=2
 
 "neocomplcache
 let g:neocomplcache_enable_at_startup=1		"启用neocomplcache
@@ -112,10 +123,6 @@ let g:tagbar_sort=0									"按出现顺序排序
 let g:tagbar_singleclick=1							"单击展开
 let g:tagbar_iconchars=['+','-']					"代表展开收缩的图标
 map <F7> :TagbarToggle<CR>							"F7快捷键
-
-"vim-session
-let g:session_autoload="yes"
-let g:session_autosave="yes"
 
 "格式化代码，包括换行不补全注释符，放前面貌似会被其它插件的配置覆盖
 autocmd BufNewFile,BufRead * set formatoptions=tcqMn
