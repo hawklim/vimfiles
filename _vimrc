@@ -2,10 +2,9 @@ set langmenu=zh_CN.UTF-8						"菜单语言
 set fileencodings=utf-8,gbk,ucs-bom,cp936		"支持的文件编码
 set fileencoding=utf-8							"保存的编码格式
 
-
 "提示信息的编码，windows下为gbk，linux下为utf-8
 if has("win32")
-	language message zh_CN.gbk
+	language message zh_CN.gbkg
 else
 	language message zh_CN.utf-8
 endif
@@ -17,19 +16,22 @@ let mapleader=","		"设置mapleader
 map <Leader>md :e ++ff=unix %<CR>		"<leader>md显示windows换行符
 map <Leader>ms :%s/<C-V><C-M>/g<CR>		"<Leader>ms除去windows换行符，需先显示
 
-set nocompatible					"不使用vi的键盘模式
-set hidden							"允许切换buffer时不保存当前buffer
-set noerrorbells					"关闭出错时的提示声音
-set t_vb=							"使用屏幕闪烁代替bell
-set novisualbell					"屏幕不要闪烁
-set backspace=indent,eol,start		"退格键删除的字符
-set ww=h,l,<,>,[,]					"设置whichwrap的值
-
+" set history                      " vim保存的历史记录数
+set nocompatible               " 不使用vi的键盘模式
+set hidden                     " 允许切换buffer时不保存当前buffer
+set noerrorbells               " 关闭出错时的提示声音
+set t_vb=                      " 使用屏幕闪烁代替bell
+set novisualbell               " 屏幕不要闪烁
+set backspace=indent,eol,start " 退格键删除的字符
+set ww=h,l,<,>,[,]             " 设置whichwrap的值
 set autochdir				"切换当前目录为当前文件所在的目录
 set guioptions-=T			"隐藏工具栏
-"set statusline=%F%m%r%h%w\ %=[%{&ff}]\%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
+set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
+set ruler					"显示光标位置
+set showcmd					"显示未完成命令
 set laststatus=2
 syntax on					"代码高亮
+let g:molokai_original=1	"使用molokai传统背景色
 colorscheme molokai			"配色
 set nu						"显示行号
 set autoindent				"换行自动缩进
@@ -40,12 +42,12 @@ set shiftwidth=4			"同上
 set noshowmatch				"高亮显示匹配的括号
 let loaded_matchparen=0		"取消匹配括号高亮显示，伤眼
 
-set ignorecase		"搜索时忽略大小写
-set incsearch		"搜索时搜索的内容全高亮，默认为首字母高亮
+set ignorecase					"搜索时忽略大小写
+set incsearch					"搜索时搜索的内容全高亮，默认为首字母高亮
 
 "windows下不备份文件，linux下备份文件
 if has("win32")
-	set nobackup				"不备份文件	
+	set nobackup				"不备份文件
 else
 	set backup					"备份文件
 	set bdir=~/vimbackup		"备份文件所在的路径
@@ -55,7 +57,8 @@ endif
 "若上一层目录仍无tags文件，则再往更上一层目录查找，直至找到tags文件
 set tags=./tags;/
 
-filetyp on						"侦测文件类型
+filetype on						"侦测文件类型
+filetype plugin on				"启用针对不同文件类型的插件
 filetype plugin indent on		"载入文件类型插件
 filetype indent on				"为特定文件类型载入相关缩进文件
 
@@ -78,21 +81,12 @@ map <F5> :!php -q <C-R>%<CR>
 "将php手册融入vim，按K即可查看函数说明
 autocmd BufNewFile,Bufread *.php set keywordprg="help"
 
-"编辑习惯
-"映射 <C-A> ggVG
-map <C-A> ggVG
-map! <C-A> <Esc>ggVG
-"映射复制、粘贴、剪切
-map <C-C> "+y
-map <C-V> "+gP
-map <C-X> "+x
-
 "启用pathogen
 "管理插件的插件
 call pathogen#infect()
 
 "minibufexpl
-let g:miniBufExplorerMoreThanOne=1			"让minibufexpl自动打开
+"let g:miniBufExplorerMoreThanOne=1			"让minibufexpl自动打开
 let g:miniBufExplMapWindowNavVim=1			"可使用<C-h,j,k,l>切换到上下左右窗口
 let g:miniBufExplMapCTabSwitchBufs=1		"可使用<C-tab>切换窗口
 let g:miniBufExplMapWindowNavArrows=1		"可使用<C-箭头键切换到上下左右窗口
@@ -110,6 +104,10 @@ let g:neocomplcache_enable_at_startup=1		"启用neocomplcache
 let g:NERDTreeWinSize=31		"宽度
 let g:NERDTreeWinPos="right"	"在右侧显示
 map <F8> :NERDTreeToggle<CR>	"F8快捷键
+
+"syntastic
+let g:syntastic_check_on_open=1			"打开文件自动进行语法检查
+let g:syntastic_phpcs_disable=1			"关闭PHP_CodeSniffer检查
 
 "tagbar
 "显示变量和函数列表的插件
