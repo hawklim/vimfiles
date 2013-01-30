@@ -26,7 +26,6 @@ set backspace=indent,eol,start " 退格键删除的字符
 set ww=h,l,<,>,[,]             " 设置whichwrap的值
 set autochdir				"切换当前目录为当前文件所在的目录
 set guioptions-=T			"隐藏工具栏
-set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
 set ruler					"显示光标位置
 set showcmd					"显示未完成命令
 set laststatus=2
@@ -44,6 +43,9 @@ let loaded_matchparen=0		"取消匹配括号高亮显示，伤眼
 
 set ignorecase					"搜索时忽略大小写
 set incsearch					"搜索时搜索的内容全高亮，默认为首字母高亮
+
+set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
+hi statusline guifg=#575757 guibg=#f7f7f7
 
 "windows下不备份文件，linux下备份文件
 if has("win32")
@@ -98,6 +100,10 @@ let g:ctrlp_working_path_mode=2
 
 "neocomplcache
 let g:neocomplcache_enable_at_startup=1		"启用neocomplcache
+"neocomplcache弹出框颜色设置
+hi Pmenu ctermbg=8  guifg=#333333 guibg=#cccccc
+hi PmenuSel ctermbg=1 guifg=#000000 guibg=#aec7e6
+hi PmenuSbar ctermbg=0 guibg=#666666
 
 "nerdtree
 "显示目录树
