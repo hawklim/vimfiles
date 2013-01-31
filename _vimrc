@@ -111,6 +111,9 @@ let g:NERDTreeWinSize=31		"宽度
 let g:NERDTreeWinPos="right"	"在右侧显示
 map <F8> :NERDTreeToggle<CR>	"F8快捷键
 
+"snipMate
+let g:snips_author="Thoth Dev Team"
+
 "syntastic
 let g:syntastic_check_on_open=1			"打开文件自动进行语法检查
 let g:syntastic_phpcs_disable=1			"关闭PHP_CodeSniffer检查
