@@ -94,7 +94,7 @@ call vundle#rc()
 " }}}
 
 " 快速生成代码段 {{{
-	Bundle 'Shougo/neosnippet'
+	Bundle 'dongxiong/neosnippet'
 
 	" 快捷键
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
