@@ -19,7 +19,7 @@ set showcmd										" 显示未完成命令
 set laststatus=2								" 显示状态栏	
 set nu											" 显示行号
 set autoindent									" 换行自动缩进
-set noexpandtab									" 不用空格代替制表符
+set expandtab									" 不用空格代替制表符
 set tabstop=4									" tab宽度
 set softtabstop=4								" 统一缩进为4
 set shiftwidth=4								" 同上
