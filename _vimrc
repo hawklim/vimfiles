@@ -76,16 +76,28 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 
 "--------------------------------------------------
 " 加载插件及配色
+"
+" 注意：
+" 1、载入配色需在hi之前，否则hi无效
+"
 "--------------------------------------------------
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
+" 管理插件的插件 {{{
+    Bundle 'gmarik/vundle'
+" }}}
+
+" molokai配色 {{{
+    Bundle 'tomasr/molokai'
+
+    let g:molokai_original=1                    " 使用molokai传统背景色
+    color molokai                               " 设定配色
+    hi statusline guifg=#575757 guibg=#f7f7f7   " 状态栏颜色
+" }}}
 
 " 快速的词间跳跃 {{{
     Bundle 'Lokaltog/vim-easymotion'
@@ -97,7 +109,7 @@ call vundle#rc()
     let g:neocomplcache_enable_at_startup=1     " 启用neocomplcache
 
     " neocomplcache弹出框颜色设置
-    hi Pmenu ctermbg=8  guifg=#333333 guibg=#cccccc
+    hi Pmenu ctermbg=8 guifg=#333333 guibg=#cccccc
     hi PmenuSel ctermbg=1 guifg=#000000 guibg=#aec7e6
     hi PmenuSbar ctermbg=0 guibg=#666666
 " }}}
@@ -128,10 +140,6 @@ call vundle#rc()
     let g:miniBufExplMapWindowNavArrows=1       " 可使用<C-箭头键切换到上下左右窗口
     let g:miniBufExplUseSingleClick=1           " 单击即可切换buffer
     let g:miniBufExplModSelTarget=1             " 让打开的buffer显示在正确的地方
-" }}}
-
-" 管理插件的插件 {{{
-    Bundle 'gmarik/vundle'
 " }}}
 
 " 对齐 {{{
@@ -178,22 +186,13 @@ call vundle#rc()
 " }}}
 
 " 错误提示 {{{
-    Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 
-    let g:syntastic_check_on_open=1             " 打开文件自动进行语法检查
-    let g:syntastic_phpcs_disable=1             " 关闭PHP_CodeSniffer检查
+    " let g:syntastic_check_on_open=1             " 打开文件自动进行语法检查
 " }}}
 
 " PHP集成 {{{
     Bundle 'spf13/PIV'
-" }}}
-
-" molokai配色 {{{
-    Bundle 'tomasr/molokai'
-
-    let g:molokai_original=1                    " 使用molokai传统背景色
-    color molokai                               " 设定配色
-    hi statusline guifg=#575757 guibg=#f7f7f7   " 状态栏颜色
 " }}}
 
 " 括号、引号快速处理 {{{
