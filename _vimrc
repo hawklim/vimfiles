@@ -26,7 +26,7 @@ set shiftwidth=4                                " 每层缩进空格数
 set noshowmatch                                 " 高亮显示匹配的括号
 set ignorecase                                  " 搜索时忽略大小写
 set incsearch                                   " 搜索时搜索的内容全高亮，默认为首字母高亮
-set fileformat=dos                              " 设置换行符类型
+set fileformat=unix                             " 设置换行符类型
 set tags=./tags;/                               " 从当前目录开始往上层递归查找ctags文件
 set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
 
