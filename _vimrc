@@ -71,6 +71,15 @@ map <Leader>md :e ++ff=unix %<CR>				" <leader>md显示windows换行符
 map <Leader>ms :%s/<C-V><C-M>/g<CR>				" <Leader>ms除去windows换行符，需先显示
 map <F5> :!php -q <C-R>%<CR>					" 执行php代码
 
+" 禁用邪恶的方向键
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 "--------------------------------------------------
 " 加载插件及配色
@@ -94,7 +103,7 @@ call vundle#rc()
 " }}}
 
 " 快速生成代码段 {{{
-	Bundle 'dongxiong/neosnippet'
+	Bundle 'Shougo/neosnippet'
 
 	" 快捷键
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
