@@ -1,46 +1,46 @@
 "--------------------------------------------------
 " 基本配置
 "--------------------------------------------------
-set langmenu=zh_CN.UTF-8                        " 菜单语言
-set fileencodings=utf-8,gbk,ucs-bom,cp936       " 支持的文件编码
-set fileencoding=utf-8                          " 保存的编码格式
-set history=256                                 " vim保存的历史记录数
-set nocompatible                                " 不使用vi的键盘模式
-set hidden                                      " 允许切换buffer时不保存当前buffer
-set backspace=indent,eol,start                  " 退格键删除的字符
-set ww=h,l,<,>,[,]                              " 设置whichwrap的值
-set autochdir                                   " 切换当前目录为当前文件所在的目录
-set guioptions-=T                               " 隐藏工具栏
-set ruler                                       " 显示光标位置
-set showcmd                                     " 显示未完成命令
-set laststatus=2                                " 显示状态栏    
-set nu                                          " 显示行号
-set autoindent                                  " 换行自动缩进
-set expandtab                                   " 不用空格代替制表符
-set tabstop=4                                   " tab宽度
-set softtabstop=4                               " 退格删除4个空格
-set shiftwidth=4                                " 每层缩进空格数
-set noshowmatch                                 " 高亮显示匹配的括号
-set ignorecase                                  " 搜索时忽略大小写
-set incsearch                                   " 搜索时搜索的内容全高亮，默认为首字母高亮
-set fileformat=unix                             " 设置换行符类型
-set tags=./tags;/                               " 从当前目录开始往上层递归查找ctags文件
+set langmenu=zh_CN.UTF-8						" 菜单语言
+set fileencodings=utf-8,gbk,ucs-bom,cp936		" 支持的文件编码
+set fileencoding=utf-8							" 保存的编码格式
+set history=256									" vim保存的历史记录数
+set nocompatible								" 不使用vi的键盘模式
+set hidden										" 允许切换buffer时不保存当前buffer
+set backspace=indent,eol,start					" 退格键删除的字符
+set ww=h,l,<,>,[,]								" 设置whichwrap的值
+set autochdir									" 切换当前目录为当前文件所在的目录
+set guioptions-=T								" 隐藏工具栏
+set ruler										" 显示光标位置
+set showcmd										" 显示未完成命令
+set laststatus=2								" 显示状态栏    
+set nu											" 显示行号
+set autoindent									" 换行自动缩进
+set noexpandtab									" 不用空格代替制表符
+set tabstop=4									" tab宽度
+set softtabstop=4								" 退格删除4个空格
+set shiftwidth=4								" 每层缩进空格数
+set noshowmatch									" 高亮显示匹配的括号
+set ignorecase									" 搜索时忽略大小写
+set incsearch									" 搜索时搜索的内容全高亮，默认为首字母高亮
+set fileformat=unix								" 设置换行符类型
+set tags=./tags;/								" 从当前目录开始往上层递归查找ctags文件
 set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc)
     \.((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
-set wildmenu                                    " 命令行自动完成操作
-set backup                                      " 备份文件
-set bdir=$VIM/vimfiles/backup                   " 备份文件所在的路径
+set wildmenu									" 命令行自动完成操作
+set backup										" 备份文件
+set bdir=$VIM/vimfiles/backup					" 备份文件所在的路径
 
-let mapleader=","                               " 设置mapleader
-let loaded_matchparen=0                         " 取消匹配括号高亮显示，伤眼
-let &termencoding=&encoding                     " 用于屏幕显示的编码
+let mapleader=","								" 设置mapleader
+let loaded_matchparen=0							" 取消匹配括号高亮显示，伤眼
+let &termencoding=&encoding						" 用于屏幕显示的编码
 
-syntax on                                       " 代码高亮
+syntax on										" 代码高亮
 
-filetype off                                    " 关闭侦测文件类型
-filetype plugin on                              " 启用针对不同文件类型的插件
-filetype plugin indent on                       " 载入文件类型插件
-filetype indent on                              " 为特定文件类型载入相关缩进文件
+filetype off									" 关闭侦测文件类型
+filetype plugin on								" 启用针对不同文件类型的插件
+filetype plugin indent on						" 载入文件类型插件
+filetype indent on								" 为特定文件类型载入相关缩进文件
 
 " 格式化代码，包括换行不补全注释符
 autocmd BufNewFile,BufRead * set formatoptions=tcqMn
@@ -97,6 +97,7 @@ call vundle#rc('$VIM/vimfiles/bundle/')
     hi PmenuSbar ctermbg=0 guibg=#666666
     hi Special guifg=#66D9EF guibg=bg gui=bold  " 改斜体为粗体
     hi statusline guifg=#575757 guibg=#f7f7f7   " 状态栏颜色
+	hi StorageClass guifg=#FD971F gui=bold		" 改斜体为粗体
 " }}}
 
 " 快速的词间跳跃 {{{
@@ -159,7 +160,7 @@ call vundle#rc('$VIM/vimfiles/bundle/')
 
     " windows下制定ctags.exe路径
     if has("win32")
-        let g:tagbar_ctags_bin='$VIMRUNTIME/ctags.exe'
+        let g:tagbar_ctags_bin='$VIM/vimfiles/bundle/ctags.exe/ctags.exe'
     endif
 
     let g:tagbar_width=40                       " 宽度（字符宽度）
@@ -191,14 +192,6 @@ call vundle#rc('$VIM/vimfiles/bundle/')
     " let g:syntastic_check_on_open=1             " 打开文件自动进行语法检查
 " }}}
 
-" PHP集成 {{{
-    Bundle 'spf13/PIV'
-
-    let g:DisableAutoPHPFolding=1                   " 取消代码自动折叠
-
-    hi def link phpParent Delimiter                 " 取消大括号高亮
-" }}}
-
 " 括号、引号快速处理 {{{
     Bundle 'tpope/vim-surround'
 " }}}
@@ -210,3 +203,9 @@ call vundle#rc('$VIM/vimfiles/bundle/')
 " 查找功能 {{{
     Bundle 'grep.vim'
 " }}}
+
+if has("win32")
+" ctags.exe {{{
+    Bundle 'ctags.exe'
+" }}}
+endif
