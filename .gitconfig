@@ -1,2 +1,2 @@
 [core]
-pager = less -FXRS -x4
+tabwidth=4
