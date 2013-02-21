@@ -29,7 +29,6 @@ set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc)
     \.((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
 set wildmenu                                        " 命令行自动完成操作
 set backup                                          " 备份文件
-set bdir=$VIM/vimfiles/backup                       " 备份文件所在的路径
 
 let mapleader=","                                   " 设置mapleader
 let loaded_matchparen=0                             " 取消匹配括号高亮显示，伤眼
@@ -50,10 +49,14 @@ autocmd BufNewFile,BufRead * set formatoptions=tcqMn
 " Linux与Windows下有差异的配置
 "--------------------------------------------------
 if has("win32")
+    set bdir=$VIM/vimfiles/backup                   " 备份文件所在的路径
+
     language message zh_CN.gbk                      " 提示信息编码为gbk
 
     autocmd GUIEnter * simalt ~x                    " GVim最大化
-elseif
+else
+    set bdir=~/vimfiles/backup
+
     language message zh_CN.utf-8                    " 提示信息编码为utf-8
 
     autocmd GUIEnter * winsize 200 100              " GVim最大化
@@ -81,8 +84,13 @@ autocmd BufWritePre * :%s/\s\+$//e                  " 保存buffer时删除行�
 " 注意：
 " 1、载入配色需在hi之前，否则hi无效
 "--------------------------------------------------
-set rtp+=$VIM/vimfiles/bundle/vundle/
-call vundle#rc('$VIM/vimfiles/bundle/')
+if has("win32")
+    set rtp+=$VIM/vimfiles/bundle/vundle/
+    call vundle#rc('$VIM/vimfiles/bundle/')
+else
+    set rtp+=~/vimfiles/bundle/vundle/
+    call vundle#rc('~/vimfiles/bundle/')
+endif
 
 " 管理插件的插件 {{{
     Bundle 'gmarik/vundle'
@@ -118,7 +126,11 @@ call vundle#rc('$VIM/vimfiles/bundle/')
     Bundle 'Shougo/neosnippet'
 
     " 自定义 snippets目录
-    let g:neosnippet#snippets_directory='$VIM/vimfiles/snippets'
+    if has("win32")
+        let g:neosnippet#snippets_directory='$VIM/vimfiles/snippets'
+    else
+        let g:neosnippet#snippets_directory='~/vimfiles/snippets'
+    endif
 
     " 使用tab键展开snippets及在占位符间跳跃
     imap <expr><TAB> neosnippet#expandable_or_jumpable()
