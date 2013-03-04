@@ -19,10 +19,10 @@ snippet def
 	define('${1:CONST}', ${2});${0}
 
 snippet ec
-	echo ${1};${0}
+	echo ${1};
 
 snippet pec
-	<?php echo ${1}; ?>${0}
+	<?php echo ${1}; ?>
 
 snippet arr
 	$${1:array} = array('${2}' => ${3} ${0});
@@ -85,7 +85,7 @@ snippet elseif
 
 snippet for
 	for ($${1:i}=${2:0}; $$1 < ${3:num}; $$1++)
-	{ 
+	{
 		${0}
 	}
 
@@ -105,7 +105,7 @@ snippet do
 	do
 	{
 		${0}
-	} 
+	}
 	while (${1:#:condition});
 
 snippet wh
@@ -244,7 +244,7 @@ snippet doch
 	 * @copyright ${4}
 	 * @package ${5:default}
 	 **/
-	
+
 	/**
 	 * Define DocBlock
 	 **/

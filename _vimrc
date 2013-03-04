@@ -4,6 +4,7 @@
 set langmenu=zh_CN.UTF-8                            " 菜单语言
 set fileencodings=utf-8,gbk,ucs-bom,cp936           " 支持的文件编码
 set fileencoding=utf-8                              " 保存的编码格式
+set t_Co=256                                        " 配色方案使用256色
 set history=256                                     " vim保存的历史记录数
 set nocompatible                                    " 不使用vi的键盘模式
 set hidden                                          " 允许切换buffer时不保存当前buffer
@@ -37,9 +38,6 @@ let &termencoding=&encoding                         " 用于屏幕显示的编�
 syntax on                                           " 代码高亮
 
 filetype off                                        " 关闭侦测文件类型
-filetype plugin on                                  " 启用针对不同文件类型的插件
-filetype plugin indent on                           " 载入文件类型插件
-filetype indent on                                  " 为特定文件类型载入相关缩进文件
 
 " 格式化代码，包括换行不补全注释符
 autocmd BufNewFile,BufRead * set formatoptions=tcqMn
@@ -103,17 +101,13 @@ endif
     color molokai                                   " 设定配色
 
     " 修改部分配色
-    hi Delimiter              guifg=#FFFFFF
-    hi Pmenu        ctermbg=8 guifg=#333333 guibg=#CCCCCC
-    hi PmenuSel     ctermbg=1 guifg=#000000 guibg=#AEC7E6
-    hi PmenuSbar    ctermbg=0 guibg=#666666
-    hi Special                guifg=#66D9EF guibg=bg      gui=bold
-    hi statusline             guifg=#575757 guibg=#F7F7F7
-    hi StorageClass           guifg=#FD971F               gui=bold
-" }}}
-
-" 快速的词间跳跃 {{{
-    Bundle 'Lokaltog/vim-easymotion'
+    hi Delimiter    ctermfg=253 guifg=#FFFFFF
+    hi Pmenu        ctermbg=8   guifg=#333333 guibg=#CCCCCC
+    hi PmenuSel     ctermbg=1   guifg=#000000 guibg=#AEC7E6
+    hi PmenuSbar    ctermbg=0   guibg=#666666
+    hi Special                  guifg=#66D9EF guibg=bg      gui=bold
+    hi StatusLine               guifg=#575757 guibg=#F7F7F7
+    hi StorageClass             guifg=#FD971F               gui=bold
 " }}}
 
 " 代码提示 {{{
@@ -141,9 +135,9 @@ endif
 
     " 控制snippets中占位符的显示
     " if has('conceal')判断编译Vim时是否加入conceal选项
-    if has('conceal')
-        set conceallevel=2 concealcursor=nvi
-    endif
+    " if has('conceal')
+        " set conceallevel=2 concealcursor=nvi
+    " endif
 " }}}
 
 " 自动判断使用tab还是space进行缩进 {{{
@@ -159,7 +153,7 @@ endif
     Bundle 'godlygeek/tabular'
 " }}}
 
-" 括号、引号补全 {{{
+" 括号补全 {{{
     Bundle 'jiangmiao/auto-pairs'
 " }}}
 
@@ -201,17 +195,18 @@ endif
 " }}}
 
 " 错误提示 {{{
-" Bundle 'scrooloose/syntastic'
+    " Bundle 'scrooloose/syntastic'
 
     " let g:syntastic_check_on_open=1               " 打开文件自动进行语法检查
 " }}}
 
-" 括号、引号快速处理 {{{
-    Bundle 'tpope/vim-surround'
-" }}}
-
 " 显示buffer列表 {{{
     Bundle 'bufexplorer.zip'
+
+    let g:bufExplorerShowNoName=1                   " 显示NoName的buffer
+    let g:bufExplorerSortBy='number'                " 按序号排列buffer
+    let g:bufExplorerSplitBelow=1
+    let g:bufExplorerSplitRight=1
 " }}}
 
 " 查找功能 {{{
@@ -223,3 +218,5 @@ if has("win32")
     Bundle 'ctags.exe'
 " }}}
 endif
+
+filetype plugin indent on                           " 必须位于Bundle之后
