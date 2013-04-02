@@ -149,10 +149,6 @@ endif
     autocmd BufReadPost * :DetectIndent
 " }}}
 
-" 对齐 {{{
-    Bundle 'godlygeek/tabular'
-" }}}
-
 " 括号补全 {{{
     Bundle 'jiangmiao/auto-pairs'
 " }}}
@@ -192,12 +188,6 @@ endif
     let g:NERDTreeWinPos="right"                    " 在右侧显示
 
     map <F8> :NERDTreeToggle<CR>                    " F8快捷键
-" }}}
-
-" 错误提示 {{{
-    " Bundle 'scrooloose/syntastic'
-
-    " let g:syntastic_check_on_open=1               " 打开文件自动进行语法检查
 " }}}
 
 " 显示buffer列表 {{{
