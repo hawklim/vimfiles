@@ -2,57 +2,38 @@ snippet php
 	<?php
 	${0}
 
-snippet eof
-	/* End of file ${1:file}.php */
-	/* Location: ./${2:dir}/$1.php */
-
-snippet eoc
-	// END ${1:class_name} class
-
-snippet l1
-	// ------------------------------------------------------------------------
-
-snippet l2
-	// --------------------------------------------------------------------
-
 snippet def
-	define('${1:CONST}', ${2});${0}
+	define('${1:CONST}', ${2});
 
 snippet ec
 	echo ${1};
 
-snippet pec
+snippet pe
 	<?php echo ${1}; ?>
 
 snippet arr
-	$${1:array} = array('${2}' => ${3} ${0});
+	$${1:array} = array(${2});
 
 snippet inc
-	include '${1:file}';${0}
+	include '${1:file}';
 
 snippet inco
-	include_once '${1:file}';${0}
+	include_once '${1:file}';
 
 snippet req
-	require '${1:file}';${0}
+	require '${1:file}';
 
 snippet reqo
-	require_once '${1:file}';${0}
+	require_once '${1:file}';
 
 snippet a
-	$${1:val1} = $${2:val2};${0}
+	$${1:val1} = ${2:val2};
 
 snippet pr
-	print_r(${1});${0}
-
-snippet post
-	$this->input->post('${1}')
-
-snippet lm
-	$this->load->model('${1:model_name}');
+	print_r(${1});
 
 snippet if?
-	$${1:ret} = (${2:#:condition}) ? ${3:#:a} : ${4:#:b};${0}
+	$${1:ret} = (${2:#:condition}) ? ${3:#:a} : ${4:#:b};
 
 snippet if
 	if (${1:#:condition})
@@ -69,7 +50,6 @@ snippet ife
 	{
 		${3:#:code...}
 	}
-	{0}
 
 snippet else
 	else
@@ -160,7 +140,7 @@ abbr private function () {}
 	}
 
 snippet ret
-	return ${1};${0}
+	return ${1};
 
 snippet retf
 	return FALSE;
@@ -169,7 +149,8 @@ snippet rett
 	return TRUE;
 
 snippet class
-	class ${1:class_name} {
+	class ${1:class_name}
+	{
 		${0}
 	}
 
@@ -183,34 +164,12 @@ snippet cc
 	// ${1:text}
 
 snippet cm
-	/* ${1:text} */${0}
+	/* ${1:text} */
 
 snippet c
 	/**
 	 * ${1}
 	 */
-
-snippet cidoc
-	/*
-	| -------------------------------------------------------------------
-	| ${1:title}
-	| -------------------------------------------------------------------
-	| ${0}
-	*/
-
-snippet hdoc
-	/**
-	 * Thoth
-	 *
-	 * A free and open source platform for Q&A sites
-	 *
-	 * @package		Thoth
-	 * @author		Thoth Dev Team
-	 * @filesource
-	 */
-
-	// ------------------------------------------------------------------------
-	${0}
 
 snippet cdoc
 	/**
@@ -227,24 +186,4 @@ snippet fdoc
 	 *
 	 * @access	${2:public}
 	 * @return	${3:data_type}
-	 **/
-
-snippet docd
-	/**
-	 * ${3:#:undocumented constant}
-	 **/
-	define(${1} ${2});${0}
-
-snippet doch
-	/**
-	 * ${1}
-	 *
-	 * @author ${2}
-	 * @version ${3}
-	 * @copyright ${4}
-	 * @package ${5:default}
-	 **/
-
-	/**
-	 * Define DocBlock
 	 **/

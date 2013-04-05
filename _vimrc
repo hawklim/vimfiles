@@ -4,7 +4,7 @@
 set langmenu=zh_CN.UTF-8                            " 菜单语言
 set fileencodings=utf-8,gbk,ucs-bom,cp936           " 支持的文件编码
 set fileencoding=utf-8                              " 保存的编码格式
-set t_Co=256                                        " 配色方案使用256色
+set t_Co=16                                         " 配色方案使用16色
 set history=256                                     " vim保存的历史记录数
 set nocompatible                                    " 不使用vi的键盘模式
 set hidden                                          " 允许切换buffer时不保存当前buffer
@@ -32,16 +32,21 @@ set wildmenu                                        " 命令行自动完成操�
 set backup                                          " 备份文件
 
 let mapleader=","                                   " 设置mapleader
-let loaded_matchparen=0                             " 取消匹配括号高亮显示，伤眼
+" let loaded_matchparen=0                             " 取消匹配括号高亮显示，伤眼
 let &termencoding=&encoding                         " 用于屏幕显示的编码
 
-syntax on                                           " 代码高亮
+syntax enable                                       " 代码高亮
 
 filetype off                                        " 关闭侦测文件类型
 
 " 格式化代码，包括换行不补全注释符
 autocmd BufNewFile,BufRead * set formatoptions=tcqMn
 
+" 不同文件类型采用不同的缩进
+autocmd Filetype css setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype vim setlocal ts=4 sts=4 sw=4 expandtab
 
 "--------------------------------------------------
 " Linux与Windows下有差异的配置
@@ -59,7 +64,6 @@ else
 
     autocmd GUIEnter * winsize 200 100              " GVim最大化
 endif
-
 
 "--------------------------------------------------
 " 扩展功能
@@ -94,20 +98,11 @@ endif
     Bundle 'gmarik/vundle'
 " }}}
 
-" molokai配色 {{{
-    Bundle 'tomasr/molokai'
+" solarized配色 {{{
+    Bundle 'altercation/vim-colors-solarized'
 
-    let g:molokai_original=1                        " 使用molokai传统背景色
-    color molokai                                   " 设定配色
-
-    " 修改部分配色
-    hi Delimiter    ctermfg=253 guifg=#FFFFFF
-    hi Pmenu        ctermbg=8   guifg=#333333 guibg=#CCCCCC
-    hi PmenuSel     ctermbg=1   guifg=#000000 guibg=#AEC7E6
-    hi PmenuSbar    ctermbg=0   guibg=#666666
-    hi Special                  guifg=#66D9EF guibg=bg      gui=bold
-    hi StatusLine               guifg=#575757 guibg=#F7F7F7
-    hi StorageClass             guifg=#FD971F               gui=bold
+    set background=dark                             " 使用深色的配色方案
+    colorscheme solarized                           " 使用配色
 " }}}
 
 " 代码提示 {{{
@@ -140,13 +135,8 @@ endif
     " endif
 " }}}
 
-" 自动判断使用tab还是space进行缩进 {{{
-    Bundle 'ciaranm/detectindent'
-
-    let g:detectindent_preferred_indent=4           " ts、sw的值设为4
-    let g:detectindent_max_lines_to_analyse=1024    " 分析1024行
-
-    autocmd BufReadPost * :DetectIndent
+" 对齐 {{{
+    Bundle 'godlygeek/tabular'
 " }}}
 
 " 括号补全 {{{
