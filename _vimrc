@@ -21,9 +21,10 @@ set noexpandtab                                     " 不用空格代替制表�
 set tabstop=4                                       " tab宽度
 set softtabstop=4                                   " 退格删除4个空格
 set shiftwidth=4                                    " 每层缩进空格数
-set noshowmatch                                     " 高亮显示匹配的括号
+set noshowmatch                                     " 不匹配对应括号
 set ignorecase                                      " 搜索时忽略大小写
 set incsearch                                       " 搜索时搜索的内容全高亮，默认为首字母高亮
+set nowrapscan                                      " 搜索到文件末后不返回文件头
 set fileformat=unix                                 " 设置换行符类型
 set tags=./tags;/                                   " 从当前目录开始往上层递归查找ctags文件
 set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc)
@@ -32,7 +33,7 @@ set wildmenu                                        " 命令行自动完成操�
 set backup                                          " 备份文件
 
 let mapleader=","                                   " 设置mapleader
-" let loaded_matchparen=0                             " 取消匹配括号高亮显示，伤眼
+let loaded_matchparen=0                             " 取消匹配括号高亮显示，伤眼
 let &termencoding=&encoding                         " 用于屏幕显示的编码
 
 syntax enable                                       " 代码高亮
@@ -43,10 +44,10 @@ filetype off                                        " 关闭侦测文件类型
 autocmd BufNewFile,BufRead * set formatoptions=tcqMn
 
 " 不同文件类型采用不同的缩进
-autocmd Filetype css setlocal ts=2 sts=2 sw=2 expandtab
-autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
-autocmd Filetype vim setlocal ts=4 sts=4 sw=4 expandtab
+" autocmd Filetype css setlocal ts=2 sts=2 sw=2 expandtab
+" autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
+" autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
+" autocmd Filetype vim setlocal ts=4 sts=4 sw=4 expandtab
 
 "--------------------------------------------------
 " Linux与Windows下有差异的配置
@@ -78,7 +79,7 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
-autocmd BufWritePre * :%s/\s\+$//e                  " 保存buffer时删除行末空格
+" autocmd BufWritePre * :%s/\s\+$//e                  " 保存buffer时删除行末空格
 
 "--------------------------------------------------
 " 加载插件及配色
@@ -135,6 +136,16 @@ endif
     " endif
 " }}}
 
+" 自动判断使用tab还是空格缩进 {{{
+    Bundle 'ciaranm/detectindent'
+
+    let g:detectindent_preferred_expandtab = 0      " 默认不将tab转换成空格
+    let g:detectindent_preferred_indent = 4         " 默认的缩进位数
+    let g:detectindent_max_lines_to_analyse = 1024  " 分析行数
+
+    autocmd BufReadPost * :DetectIndent
+" }}}
+
 " 对齐 {{{
     Bundle 'godlygeek/tabular'
 " }}}
@@ -166,9 +177,9 @@ endif
 " }}}
 
 " 快速注释 {{{
-    let g:NERDSpaceDelims=1                         " 注释符与注释内容间保留一个空格
-
     Bundle 'scrooloose/nerdcommenter'
+
+    let g:NERDSpaceDelims=1                         " 注释符与注释内容间保留一个空格
 " }}}
 
 " 显示目录树 {{{

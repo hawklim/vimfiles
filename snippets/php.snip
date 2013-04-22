@@ -1,5 +1,5 @@
 snippet php
-	<?php
+	<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	${0}
 
 snippet def
@@ -7,6 +7,9 @@ snippet def
 
 snippet ec
 	echo ${1};
+
+snippet et
+    extends
 
 snippet pe
 	<?php echo ${1}; ?>
@@ -21,39 +24,41 @@ snippet inco
 	include_once '${1:file}';
 
 snippet req
-	require '${1:file}';
+	require (${1:file});
 
 snippet reqo
-	require_once '${1:file}';
+	require_once(${1:file});
 
 snippet a
 	$${1:val1} = ${2:val2};
+
+snippet ex
+	exit;
+
+snippet du
+	dump(${0});
 
 snippet pr
 	print_r(${1});
 
 snippet if?
-	$${1:ret} = (${2:#:condition}) ? ${3:#:a} : ${4:#:b};
+	$${1:ret} = ${2:#:condition} ? ${3:#:a} : ${4:#:b};
 
 snippet if
-	if (${1:#:condition})
-	{
+	if (${1:#:condition}) {
 		${0}
 	}
 
 snippet ife
-	if (${1:#:condition})
-	{
+	if (${1:#:condition}) {
 		${2}
 	}
-	else
-	{
+	else {
 		${3:#:code...}
 	}
 
 snippet else
-	else
-	{
+	else {
 		${0}
 	}
 
@@ -70,8 +75,7 @@ snippet for
 	}
 
 snippet fore
-	foreach ($${1:array} as $${2:value})
-	{
+	foreach ($${1:array} as $${2:value}) {
 		${0}
 	}
 
@@ -113,29 +117,25 @@ snippet sw
 
 snippet fun
 abbr function () {}
-	function ${1:function_name}(${2:#:args})
-	{
+	function ${1:function_name}(${2:#:args}) {
 		${0}
 	}
 
 snippet +fun
 abbr public function () {}
-	public function ${1:function_name}(${2:#:args})
-	{
+	public function ${1:function_name}(${2:#:args}) {
 		${0}
 	}
 
 snippet *fun
 abbr protected function () {}
-	protected function ${1:function_name}(${2:#:args})
-	{
+	protected function ${1:function_name}(${2:#:args}) {
 		${0}
 	}
 
 snippet -fun
 abbr private function () {}
-	private function ${1:function_name}(${2:#:args})
-	{
+	private function ${1:function_name}(${2:#:args}) {
 		${0}
 	}
 
@@ -149,16 +149,25 @@ snippet rett
 	return TRUE;
 
 snippet class
-	class ${1:class_name}
-	{
+	class ${1:class_name} {
+
 		${0}
+
 	}
 
 snippet con
-	function __construct(${1})
-	{
+    /**
+     * 构造函数
+	 *
+	 * @access	public
+	 * @return	void
+     */
+	function __construct() {
 		${0}
 	}
+
+snippet pcon
+	parent::__construct();
 
 snippet cc
 	// ${1:text}
@@ -171,19 +180,11 @@ snippet c
 	 * ${1}
 	 */
 
-snippet cdoc
-	/**
-	 * ${1:undocumented class#}
-	 *
-	 * @package		${2:Thoth}
-	 * @subpackage	${3:subpackage}
-	 * @author		${4:Thoth Dev Team}
-	 **/
-
 snippet fdoc
 	/**
 	 * ${1:undocumented function}
 	 *
 	 * @access	${2:public}
-	 * @return	${3:data_type}
-	 **/
+	 * @return	${3:void}
+	 */
+	${0}

@@ -1,0 +1,82 @@
+snippet eof
+	/* End of file ${1:file}.php */
+	/* Location: ./${2:dir}/$1.php */
+
+snippet eoc
+	// END ${1:class_name} class
+
+snippet post
+	$this->input->post('${1}');
+
+snippet lm
+	$this->load->model('${1:model_name}');
+
+snippet whdoc
+    /**
+     * Wings Framework
+     *
+     * A PHP 5 framework for web development that derived from CodeIngiter 2.1.3
+     *
+     * @package		Wings
+     * @author		AirCoding Dev Team
+     * @copyright	(c) 2013, AirCoding Dev Team
+     * @license		http://wings.aircoding.com/license.html
+     * @link		http://wings.aircoding.com/
+     * @since		Version 1.0
+     * @filesource
+     */
+	${0}
+
+snippet cidoc
+	/*
+	| -------------------------------------------------------------------
+	| ${1:title}
+	| -------------------------------------------------------------------
+	| ${0}
+	*/
+
+snippet hdoc
+	/**
+	 * AirCoding
+	 *
+	 * Web Integrated Development Environment
+	 *
+	 * @package		AirCoding
+	 * @author		AirCoding Dev Team
+	 * @copyright	(c) 2013, aircoding.com
+	 * @link		http://aircoding.com/
+	 * @since		Version 1.0
+	 * @filesource
+	 */
+
+	${0}
+
+snippet wcdoc
+	/**
+	 * ${1:undocumented class#}
+	 *
+	 * @package		Wings
+	 * @subpackage	${2:Subpackage}
+	 * @author		AirCoding Dev Team
+	 */
+
+snippet cdoc
+	/**
+	 * ${1:undocumented class#}
+	 *
+	 * @package		AirCoding
+	 * @subpackage	${2:Subpackage}
+	 * @author		AirCoding Dev Team
+	 */
+	${0}
+
+snippet isfun
+	if ( ! function_exists('${1:function_name}'))
+	{
+		${0}
+	}
+
+snippet ifvalid
+	if ($this->form_validation->run() == FALSE) {
+		${0}
+	}
