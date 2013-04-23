@@ -4,7 +4,7 @@
 set langmenu=zh_CN.UTF-8                            " 菜单语言
 set fileencodings=utf-8,gbk,ucs-bom,cp936           " 支持的文件编码
 set fileencoding=utf-8                              " 保存的编码格式
-set t_Co=16                                         " 配色方案使用16色
+" set t_Co=256                                      " 配色方案使用256色
 set history=256                                     " vim保存的历史记录数
 set nocompatible                                    " 不使用vi的键盘模式
 set hidden                                          " 允许切换buffer时不保存当前buffer
@@ -63,7 +63,7 @@ else
 
     language message zh_CN.utf-8                    " 提示信息编码为utf-8
 
-    autocmd GUIEnter * winsize 200 100              " GVim最大化
+    autocmd GUIEnter * winsize 300 100              " GVim最大化
 endif
 
 "--------------------------------------------------
@@ -79,7 +79,7 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
-" autocmd BufWritePre * :%s/\s\+$//e                  " 保存buffer时删除行末空格
+" autocmd BufWritePre * :%s/\s\+$//e                " 保存buffer时删除行末空格
 
 "--------------------------------------------------
 " 加载插件及配色
@@ -99,11 +99,14 @@ endif
     Bundle 'gmarik/vundle'
 " }}}
 
-" solarized配色 {{{
-    Bundle 'altercation/vim-colors-solarized'
+" molokai配色 {{{
+    Bundle 'tomasr/molokai'
+    let g:molokai_original = 1                      " 传统molokai背景色，深灰非黑
+    color molokai
 
-    set background=dark                             " 使用深色的配色方案
-    colorscheme solarized                           " 使用配色
+    " 终端下使用
+    " let g:rehash256 = 1
+    " set background=dark
 " }}}
 
 " 代码提示 {{{
