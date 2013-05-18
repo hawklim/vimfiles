@@ -40,15 +40,6 @@ syntax enable                                       " 代码高亮
 
 filetype off                                        " 关闭侦测文件类型
 
-" 格式化代码，包括换行不补全注释符
-autocmd BufNewFile,BufRead * set formatoptions=tcqMn
-
-" 不同文件类型采用不同的缩进
-" autocmd Filetype css setlocal ts=2 sts=2 sw=2 expandtab
-" autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
-" autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
-" autocmd Filetype vim setlocal ts=4 sts=4 sw=4 expandtab
-
 "--------------------------------------------------
 " Linux与Windows下有差异的配置
 "--------------------------------------------------
@@ -67,7 +58,7 @@ else
 endif
 
 "--------------------------------------------------
-" 扩展功能
+" 快捷键相关
 "--------------------------------------------------
 map <Leader>md :e ++ff=unix %<CR>                   " <leader>md显示windows换行符
 map <Leader>ms :%s/<C-V><C-M>/g<CR>                 " <Leader>ms除去windows换行符，需先显示
@@ -78,8 +69,6 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-
-" autocmd BufWritePre * :%s/\s\+$//e                " 保存buffer时删除行末空格
 
 "--------------------------------------------------
 " 加载插件及配色
@@ -179,6 +168,10 @@ endif
     map <F7> :TagbarToggle<CR>                      " F7快捷键
 " }}}
 
+" 搜索 {{{
+    Bundle 'mileszs/ack.vim'
+" }}}
+
 " 快速注释 {{{
     Bundle 'scrooloose/nerdcommenter'
 
@@ -194,6 +187,10 @@ endif
     map <F8> :NERDTreeToggle<CR>                    " F8快捷键
 " }}}
 
+" Vim中文输入法 {{{
+    Bundle 'vimim/vimim'
+" }}}
+
 " 显示buffer列表 {{{
     Bundle 'bufexplorer.zip'
 
@@ -204,7 +201,7 @@ endif
 " }}}
 
 " 查找功能 {{{
-    Bundle 'grep.vim'
+    " Bundle 'grep.vim'
 " }}}
 
 if has("win32")
@@ -213,4 +210,24 @@ if has("win32")
 " }}}
 endif
 
-filetype plugin indent on                           " 必须位于Bundle之后
+filetype plugin indent on                           " 必须位于bundle之后
+
+"--------------------------------------------------
+" autocmd
+"--------------------------------------------------
+" autocmd BufWritePre * :%s/\s\+$//e                " 保存buffer时删除行末空格
+
+" 格式化代码，包括换行不补全注释符
+autocmd BufNewFile,BufRead * set formatoptions=tcqMn
+
+" markdown文件设置
+autocmd BufNew,BufNewFile,BufRead *.md,*.markdown setlocal ft=markdown
+
+" 不同文件类型采用不同的缩进
+autocmd Filetype css setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype markdown setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype vim setlocal ts=4 sts=4 sw=4 expandtab
+" 必须位于bundle之后才生效，可能与某个bundle冲突
+autocmd Filetype snippet setlocal ts=4 sts=4 sw=4 noexpandtab

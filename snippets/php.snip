@@ -1,5 +1,5 @@
 snippet php
-	<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	<?php
 	${0}
 
 snippet def
@@ -9,10 +9,7 @@ snippet ec
 	echo ${1};
 
 snippet et
-    extends
-
-snippet pe
-	<?php echo ${1}; ?>
+	extends
 
 snippet arr
 	$${1:array} = array(${2});
@@ -35,9 +32,6 @@ snippet a
 snippet ex
 	exit;
 
-snippet du
-	dump(${0});
-
 snippet pr
 	print_r(${1});
 
@@ -45,20 +39,24 @@ snippet if?
 	$${1:ret} = ${2:#:condition} ? ${3:#:a} : ${4:#:b};
 
 snippet if
-	if (${1:#:condition}) {
+	if (${1:#:condition})
+	{
 		${0}
 	}
 
 snippet ife
-	if (${1:#:condition}) {
+	if (${1:#:condition})
+	{
 		${2}
 	}
-	else {
+	else
+	{
 		${3:#:code...}
 	}
 
 snippet else
-	else {
+	else
+	{
 		${0}
 	}
 
@@ -75,7 +73,8 @@ snippet for
 	}
 
 snippet fore
-	foreach ($${1:array} as $${2:value}) {
+	foreach ($${1:array} as $${2:value})
+	{
 		${0}
 	}
 
@@ -117,25 +116,29 @@ snippet sw
 
 snippet fun
 abbr function () {}
-	function ${1:function_name}(${2:#:args}) {
+	function ${1:functionName}(${2:#:args})
+	{
 		${0}
 	}
 
 snippet +fun
 abbr public function () {}
-	public function ${1:function_name}(${2:#:args}) {
+	public function ${1:functionName}(${2:#:args})
+	{
 		${0}
 	}
 
 snippet *fun
 abbr protected function () {}
-	protected function ${1:function_name}(${2:#:args}) {
+	protected function ${1:functionName}(${2:#:args})
+	{
 		${0}
 	}
 
 snippet -fun
 abbr private function () {}
-	private function ${1:function_name}(${2:#:args}) {
+	private function ${1:functionName}(${2:#:args})
+	{
 		${0}
 	}
 
@@ -143,26 +146,28 @@ snippet ret
 	return ${1};
 
 snippet retf
-	return FALSE;
+	return false;
 
 snippet rett
-	return TRUE;
+	return true;
 
 snippet class
-	class ${1:class_name} {
+	class ${1:className}
+	{
 
 		${0}
 
 	}
 
 snippet con
-    /**
-     * 构造函数
+	/**
+	 * 构造函数
 	 *
 	 * @access	public
 	 * @return	void
-     */
-	function __construct() {
+	 */
+	function __construct()
+	{
 		${0}
 	}
 
@@ -188,3 +193,44 @@ snippet fdoc
 	 * @return	${3:void}
 	 */
 	${0}
+
+snippet hdoc
+	/**
+	 * AirCoding
+	 *
+	 * Web Integrated Development Environment
+	 *
+	 * @package		AirCoding
+	 * @author		AirCoding Dev Team
+	 * @copyright	(c) 2013, aircoding.com
+	 * @link		http://aircoding.com/
+	 * @since		Version 1.0
+	 * @filesource
+	 */
+
+	${0}
+
+snippet wcdoc
+	/**
+	 * ${1:undocumented class#}
+	 *
+	 * @package		Wings
+	 * @subpackage	${2:Subpackage}
+	 * @author		AirCoding Dev Team
+	 */
+
+snippet cdoc
+	/**
+	 * ${1:undocumented class#}
+	 *
+	 * @package		AirCoding
+	 * @subpackage	${2:Subpackage}
+	 * @author		AirCoding Dev Team
+	 */
+	${0}
+
+snippet isfun
+	if ( ! function_exists('${1:functionName}'))
+	{
+		${0}
+	}
