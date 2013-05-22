@@ -168,6 +168,10 @@ endif
     map <F7> :TagbarToggle<CR>                      " F7快捷键
 " }}}
 
+" ZenCoding （Emmet） {{{
+    Bundle 'mattn/zencoding-vim'
+" }}}
+
 " 搜索 {{{
     Bundle 'mileszs/ack.vim'
 " }}}
