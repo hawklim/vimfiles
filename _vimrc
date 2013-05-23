@@ -24,7 +24,7 @@ set shiftwidth=4                                    " 每层缩进空格数
 set noshowmatch                                     " 不匹配对应括号
 set ignorecase                                      " 搜索时忽略大小写
 set incsearch                                       " 搜索时搜索的内容全高亮，默认为首字母高亮
-set nowrapscan                                      " 搜索到文件末后不返回文件头
+" set nowrapscan                                    " 搜索到文件末后不返回文件头
 set fileformat=unix                                 " 设置换行符类型
 set tags=./tags;/                                   " 从当前目录开始往上层递归查找ctags文件
 set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc)
@@ -170,10 +170,26 @@ endif
 
 " ZenCoding （Emmet） {{{
     Bundle 'mattn/zencoding-vim'
+
+    let g:user_zen_settings = {
+    \   'lang': 'zh-CN',
+    \   'html': {
+    \       'empty_element_suffix': '>',
+    \   },
+    \   'php': {
+    \       'extends' : 'html',
+    \   },
+    \}
 " }}}
 
 " 搜索 {{{
     Bundle 'mileszs/ack.vim'
+" }}}
+
+" 对齐线 {{{
+    Bundle 'nathanaelkane/vim-indent-guides'
+
+    let g:indent_guides_guide_size = 1              " 对齐线宽度
 " }}}
 
 " 快速注释 {{{
