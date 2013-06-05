@@ -129,13 +129,14 @@ endif
 " }}}
 
 " 自动判断使用tab还是空格缩进 {{{
-    Bundle 'ciaranm/detectindent'
+" 尼玛这货让我爱恨交织
+    " Bundle 'ciaranm/detectindent'
 
-    let g:detectindent_preferred_expandtab = 0      " 默认不将tab转换成空格
-    let g:detectindent_preferred_indent = 4         " 默认的缩进位数
-    let g:detectindent_max_lines_to_analyse = 1024  " 分析行数
+    " let g:detectindent_preferred_expandtab = 0      " 默认不将tab转换成空格
+    " let g:detectindent_preferred_indent = 4         " 默认的缩进位数
+    " let g:detectindent_max_lines_to_analyse = 1024  " 分析行数
 
-    autocmd BufReadPost * :DetectIndent
+    " autocmd BufReadPost * :DetectIndent
 " }}}
 
 " 对齐 {{{
@@ -218,6 +219,10 @@ endif
     let g:bufExplorerSortBy='number'                " 按序号排列buffer
     let g:bufExplorerSplitBelow=1
     let g:bufExplorerSplitRight=1
+" }}}
+
+" 关闭buffer而保留windows {{{
+    " Bundle 'bufkill.vim'
 " }}}
 
 " 查找功能 {{{
