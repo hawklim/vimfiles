@@ -4,18 +4,20 @@
 set langmenu=zh_CN.UTF-8                            " 菜单语言
 set fileencodings=utf-8,gbk,ucs-bom,cp936           " 支持的文件编码
 set fileencoding=utf-8                              " 保存的编码格式
-" set t_Co=256                                      " 配色方案使用256色
+set vb t_vb=                                        " 关闭出错时的提示声音及屏幕闪烁
+set t_Co=256                                        " 配色方案使用256色
 set history=256                                     " vim保存的历史记录数
+set bdir=~/vimfiles/backup                          " 备份文件目录
 set nocompatible                                    " 不使用vi的键盘模式
 set hidden                                          " 允许切换buffer时不保存当前buffer
 set backspace=indent,eol,start                      " 退格键删除的字符
 set ww=h,l,<,>,[,]                                  " 设置whichwrap的值
 set autochdir                                       " 切换当前目录为当前文件所在的目录
-set guioptions-=T                                   " 隐藏工具栏
 set ruler                                           " 显示光标位置
 set showcmd                                         " 显示未完成命令
 set laststatus=2                                    " 显示状态栏
 set nu                                              " 显示行号
+set fillchars+=vert:\                               " 分割栏使用空格符号
 set autoindent                                      " 换行自动缩进
 set noexpandtab                                     " 不用空格代替制表符
 set tabstop=4                                       " tab宽度
@@ -24,11 +26,8 @@ set shiftwidth=4                                    " 每层缩进空格数
 set noshowmatch                                     " 不匹配对应括号
 set ignorecase                                      " 搜索时忽略大小写
 set incsearch                                       " 搜索时搜索的内容全高亮，默认为首字母高亮
-" set nowrapscan                                    " 搜索到文件末后不返回文件头
 set fileformat=unix                                 " 设置换行符类型
 set tags=./tags;/                                   " 从当前目录开始往上层递归查找ctags文件
-set statusline=%F%m%r%h%w\ %=[%{&ff}]\ %{\"[\".(&fenc==\"\"?&enc:&fenc)
-    \.((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}\ [%Y]\ [%l,%v]\ [%p%%]
 set wildmenu                                        " 命令行自动完成操作
 set backup                                          " 备份文件
 
@@ -40,22 +39,7 @@ syntax enable                                       " 代码高亮
 
 filetype off                                        " 关闭侦测文件类型
 
-"--------------------------------------------------
-" Linux与Windows下有差异的配置
-"--------------------------------------------------
-if has("win32")
-    set bdir=$VIM/vimfiles/backup                   " 备份文件所在的路径
-
-    language message zh_CN.gbk                      " 提示信息编码为gbk
-
-    autocmd GUIEnter * simalt ~x                    " GVim最大化
-else
-    set bdir=~/vimfiles/backup
-
-    language message zh_CN.utf-8                    " 提示信息编码为utf-8
-
-    autocmd GUIEnter * winsize 300 100              " GVim最大化
-endif
+language message zh_CN.utf-8                        " 提示信息编码为utf-8
 
 "--------------------------------------------------
 " 快捷键相关
@@ -76,13 +60,8 @@ nnoremap <right> <nop>
 " 注意：
 " 1、载入配色需在hi之前，否则hi无效
 "--------------------------------------------------
-if has("win32")
-    set rtp+=$VIM/vimfiles/bundle/vundle/
-    call vundle#rc('$VIM/vimfiles/bundle/')
-else
-    set rtp+=~/vimfiles/bundle/vundle/
-    call vundle#rc('~/vimfiles/bundle/')
-endif
+set rtp+=~/vimfiles/bundle/vundle/
+call vundle#rc('~/vimfiles/bundle/')
 
 " 管理插件的插件 {{{
     Bundle 'gmarik/vundle'
@@ -90,12 +69,17 @@ endif
 
 " molokai配色 {{{
     Bundle 'tomasr/molokai'
-    let g:molokai_original = 1                      " 传统molokai背景色，深灰非黑
+    let g:molokai_original=1                      " 传统molokai背景色，深灰非黑
     color molokai
 
     " 终端下使用
-    " let g:rehash256 = 1
-    " set background=dark
+    " let g:rehash256=1
+" }}}
+
+" VIM状态栏 {{{
+    Bundle 'Lokaltog/powerline'
+
+    set rtp+=~/vimfiles/bundle/powerline/powerline/bindings/vim/
 " }}}
 
 " 代码提示 {{{
@@ -108,11 +92,7 @@ endif
     Bundle 'Shougo/neosnippet'
 
     " 自定义 snippets目录
-    if has("win32")
-        let g:neosnippet#snippets_directory='$VIM/vimfiles/snippets'
-    else
-        let g:neosnippet#snippets_directory='~/vimfiles/snippets'
-    endif
+    let g:neosnippet#snippets_directory='~/vimfiles/snippets'
 
     " 使用tab键展开snippets及在占位符间跳跃
     imap <expr><TAB> neosnippet#expandable_or_jumpable()
@@ -120,23 +100,6 @@ endif
         \ : pumvisible() ? "\<C-n>" : "\<TAB>"
     smap <expr><TAB> neosnippet#expandable_or_jumpable()
         \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-    " 控制snippets中占位符的显示
-    " if has('conceal')判断编译Vim时是否加入conceal选项
-    " if has('conceal')
-        " set conceallevel=2 concealcursor=nvi
-    " endif
-" }}}
-
-" 自动判断使用tab还是空格缩进 {{{
-" 尼玛这货让我爱恨交织
-    " Bundle 'ciaranm/detectindent'
-
-    " let g:detectindent_preferred_expandtab = 0      " 默认不将tab转换成空格
-    " let g:detectindent_preferred_indent = 4         " 默认的缩进位数
-    " let g:detectindent_max_lines_to_analyse = 1024  " 分析行数
-
-    " autocmd BufReadPost * :DetectIndent
 " }}}
 
 " 对齐 {{{
@@ -156,23 +119,18 @@ endif
 " 快速在文件中的函数、方法、变量中跳转 {{{
     Bundle 'majutsushi/tagbar.git'
 
-    " windows下制定ctags.exe路径
-    if has("win32")
-        let g:tagbar_ctags_bin='$VIM/vimfiles/bundle/ctags.exe/ctags.exe'
-    endif
-
     let g:tagbar_width=40                           " 宽度（字符宽度）
     let g:tagbar_sort=0                             " 按出现顺序排序
     let g:tagbar_singleclick=1                      " 单击展开
     let g:tagbar_iconchars=['+','-']                " 代表展开收缩的图标
 
-    map <F7> :TagbarToggle<CR>                      " F7快捷键
+    map <Leader>tb :TagbarToggle<CR>                      " F7快捷键
 " }}}
 
 " ZenCoding （Emmet） {{{
     Bundle 'mattn/zencoding-vim'
 
-    let g:user_zen_settings = {
+    let g:user_zen_settings={
     \   'lang': 'zh-CN',
     \   'html': {
     \       'empty_element_suffix': '>',
@@ -187,12 +145,6 @@ endif
     Bundle 'mileszs/ack.vim'
 " }}}
 
-" 对齐线 {{{
-    Bundle 'nathanaelkane/vim-indent-guides'
-
-    let g:indent_guides_guide_size = 1              " 对齐线宽度
-" }}}
-
 " 快速注释 {{{
     Bundle 'scrooloose/nerdcommenter'
 
@@ -202,14 +154,12 @@ endif
 " 显示目录树 {{{
     Bundle 'scrooloose/nerdtree'
 
-    let g:NERDTreeWinSize=31                        " 宽度
-    let g:NERDTreeWinPos="right"                    " 在右侧显示
+    let g:NERDTreeWinSize=31                      " 宽度
+    let g:NERDTreeWinPos="right"                  " 在右侧显示
+    let NERDTreeShowBookmarks=1                   " 默认显示所有标签
+    let NERDTreeShowHidden=1                      " 默认显示隐藏文件
 
-    map <F8> :NERDTreeToggle<CR>                    " F8快捷键
-" }}}
-
-" Vim中文输入法 {{{
-    Bundle 'vimim/vimim'
+    map <Leader>nt :NERDTreeToggle<CR>            " 快捷键
 " }}}
 
 " 显示buffer列表 {{{
@@ -224,16 +174,6 @@ endif
 " 关闭buffer而保留windows {{{
     " Bundle 'bufkill.vim'
 " }}}
-
-" 查找功能 {{{
-    " Bundle 'grep.vim'
-" }}}
-
-if has("win32")
-" ctags.exe {{{
-    Bundle 'ctags.exe'
-" }}}
-endif
 
 filetype plugin indent on                           " 必须位于bundle之后
 

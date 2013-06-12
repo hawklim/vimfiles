@@ -1,1 +1,5 @@
-set vb t_vb=            " 关闭出错时的提示声音及屏幕闪烁
+set guifont=Source\ Code\ Pro\ for\ Powerline:h14   " 字体及高度
+set showtabline=1                                   " 开启自带的tab栏
+set guioptions-=T                                   " 隐藏工具栏
+set guioptions-=L                                   " 隐藏左边的滚动条
+set guioptions-=r                                   " 隐藏右边的滚动条
